@@ -3,12 +3,23 @@ var generateBtn = document.querySelector("#generate");
 var criteriaSubmitBtn = document.querySelector("#criteria-submit-btn");
 const popupContainer = document.querySelector(".criteria-popup-container");
 const passLength = document.querySelector('#length');
+const charSet = 'abcdefghijklmnopqrstuvwxyz';
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
+}
+
+// Generate the password based on the set criteria
+function generatePassword() {
+  let result = '';
+  for (let i = 0; i < passLength.value; i++) {
+    result += charSet[Math.floor(Math.random() * 26)];
+  }
+
+  return result;
 }
 
 // Show the criteria prompt to the user 
@@ -22,6 +33,7 @@ function hideCriteriaPrompt() {
   popupContainer.style.display = "none"; 
   // Set default values to input elements 
   console.log(passLength.value);
+  writePassword();
 }
 
 // Validate that the desired password length is a whole number and within range
