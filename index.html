@@ -28,13 +28,14 @@
           <button id="generate" class="btn">Generate Password</button>
         </div>
         <div class="criteria-popup-container">
-          <form onsubmit="getCheckBoxValues(this)" class="criteria-popup">
-            <p>Check the desired criteria for your password.</p>
-            <label for="password-length"><input type="checkbox" name="criteria" value="test1" id="password-length">Test1</label>
-            <label for="password-length"><input type="checkbox" name="criteria" value="test2" id="password-length2">Test2</label>
-            <label for="password-length"><input type="checkbox" name="criteria" id="password-length3">Test3</label>
-            <input type="submit" id="criteria-submit-btn">
-          </form>
+          <div class="criteria-popup">
+            <div class="criteria">
+              <label>Enter the desired password length (8-128 characters)
+                <input type="number" id="length" min='8' max='128' step="1" default='8' />
+              </label>
+            </div>
+            <button id="criteria-submit-btn">Submit</button>
+          </div>
         </div>
       </div>
     </div>
