@@ -77,10 +77,10 @@ function hideCriteriaPrompt() {
 // Validate that the desired password length is a whole number and within range
 function updateLengthVal(change) {
   var newPassLength = Number(change.target.value);
-
   if (newPassLength < 8 || newPassLength > 128 || (newPassLength % 1) != 0) {
     // if not within range or not a whole number, send alert to window
     alert("Please enter a whole number within range.");
+    change.target.value = 8;
   } else {
     // else if, password meets validation requirements, assign to passLength
     passLength.value = newPassLength;
