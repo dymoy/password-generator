@@ -84,7 +84,7 @@ function updateLengthVal(change) {
 
 // Validate that at least 1 character type check box is checked
 function validateCheckBox() {
-  if(!includeLower.checked && !includeUpper.checked && !includeNumbers && !includeSpecial) {
+  if(!includeLower.checked && !includeUpper.checked && !includeNumbers.checked && !includeSpecial.checked) {
     alert("You must include at least 1 character type in your password.");
     includeLower.checked = true;
     includeUpper.checked = true;
