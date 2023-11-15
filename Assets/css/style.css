@@ -132,8 +132,8 @@ button[disabled] {
 }
 
 .criteria-popup {
-  width: 30%;
-  height: 80%;
+  width: 25%;
+  height: 25%;
   border-radius: 20px;
   background-color: #fff;
   position: relative;
@@ -143,7 +143,7 @@ button[disabled] {
 
 .criteria-popup label {
   color: #000;
-  display: block;
+  display: inline;
   text-align: center;
   padding: 5px;
 }
@@ -162,6 +162,10 @@ button[disabled] {
 
 #criteria-submit-btn:hover {
   cursor: pointer;
+}
+
+.check-box {
+  margin: 10px 0px;
 }
 
 @media (max-width: 690px) {

@@ -3,7 +3,12 @@ var generateBtn = document.querySelector("#generate");
 var criteriaSubmitBtn = document.querySelector("#criteria-submit-btn");
 const popupContainer = document.querySelector(".criteria-popup-container");
 const passLength = document.querySelector('#length');
-const charSet = 'abcdefghijklmnopqrstuvwxyz';
+
+const includeLower = document.getElementById('lowercase');
+const includeUpper = document.getElementById('uppercase');
+
+const lowerCharSet = 'abcdefghijklmnopqrstuvwxyz';
+const upperCharSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 // Write password to the #password input
 function writePassword() {
@@ -12,27 +17,45 @@ function writePassword() {
   passwordText.value = password;
 }
 
+function getRandomLower() {
+  return lowerCharSet[Math.floor(Math.random() * 26)];
+}
+
+function getRandomUpper() {
+  return upperCharSet[Math.floor(Math.random() * 26)];
+}
+
 // Generate the password based on the set criteria
 function generatePassword() {
   let result = '';
-  for (let i = 0; i < passLength.value; i++) {
-    result += charSet[Math.floor(Math.random() * 26)];
+  const length = passLength.value;
+
+  for (let i = 0; i < length; i++) {
+    if (includeLower.checked) {
+      result += getRandomLower();
+    }
+    if (includeUpper.checked) {
+      result += getRandomUpper();
+    }
   }
 
+  result = result.slice(0, length);
   return result;
 }
 
 // Show the criteria prompt to the user 
 function showCriteriaPrompt() {
   popupContainer.style.display = "flex";  
+  
+  // Set default values for input elements 
   passLength.value = 8;
+  includeLower.checked = true;
+  includeUpper.checked = true;
 }
 
 // Hide the criteria prompt once the submit button is clicked 
 function hideCriteriaPrompt() {
   popupContainer.style.display = "none"; 
-  // Set default values to input elements 
-  console.log(passLength.value);
   writePassword();
 }
 
@@ -49,7 +72,18 @@ function updateLengthVal(change) {
   }
 }
 
+// Validate that at least 1 character type check box is checked
+function validateCheckBox() {
+  if(!includeLower.checked && !includeUpper.checked) {
+    alert("You must include at least 1 character type in your password.");
+    includeLower.checked = true;
+    includeUpper.checked = true;
+  } 
+}
+
 // Event Listeners 
 generateBtn.addEventListener("click", showCriteriaPrompt);
 criteriaSubmitBtn.addEventListener("click", hideCriteriaPrompt);
 passLength.addEventListener('change', updateLengthVal);
+includeLower.addEventListener('change', validateCheckBox);
+includeUpper.addEventListener('change', validateCheckBox);
