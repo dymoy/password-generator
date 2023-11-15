@@ -30,9 +30,24 @@
         <div class="criteria-popup-container">
           <div class="criteria-popup">
             <div class="criteria">
-              <label>Enter the desired password length (8-128 characters)
-                <input type="number" id="length" min='8' max='128' step="1" default='8' />
-              </label>
+              <label for="length">Enter the desired password length (8-128 characters)</label>
+              <input type="number" id="length" min='8' max='128' step="1" default='8' />
+            </div>
+            <div class="criteria check-box">
+              <input type="checkbox" id="uppercase" checked="checked" />
+              <label for="uppercase">Include uppercase letters</label>
+            </div>
+            <div class="criteria check-box">
+              <input type="checkbox" id="lowercase" checked="checked"/>
+              <label for="lowercase">Include lowercase letters</label>
+            </div>
+            <div class="criteria check-box">
+              <input type="checkbox" id="numbers"/>
+              <label for="numbers">Include numbers</label>
+            </div>
+            <div class="criteria check-box">
+              <input type="checkbox" id="special"/>
+              <label for="special">Include special characters</label>
             </div>
             <button id="criteria-submit-btn">Submit</button>
           </div>
