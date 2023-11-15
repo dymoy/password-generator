@@ -22,33 +22,38 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Returns a random character from the parameter passed 
-function getRandomChar(charSet) {
-  return charSet[Math.floor(Math.random() * charSet.length)];
-}
-
 // Generate the password based on the set criteria
 function generatePassword() {
   let result = '';
   const length = passLength.value;
 
   for (let i = 0; i < length; i++) {
+    // If includeLower is checked, add a random character from lowercase character set 
     if (includeLower.checked) {
       result += getRandomChar(lowerCharSet)
     }
+    // If includeUpper is checked, add a random character from uppercase character set
     if (includeUpper.checked) {
       result += getRandomChar(upperCharSet);
     }
+    // If includeNumbers is checked, add a random character from the number character set
     if (includeNumbers.checked) {
       result += getRandomChar(numberCharSet);
     }
+    // if includeSpecial is checked, add a random character from the special character set
     if (includeSpecial.checked) {
       result += getRandomChar(specialCharSet);
     }
   }
 
+  // Slice out all characters after the desired length is met 
   result = result.slice(0, length);
   return result;
+}
+
+// Returns a random character from the character set parameter passed 
+function getRandomChar(charSet) {
+  return charSet[Math.floor(Math.random() * charSet.length)];
 }
 
 // Show the criteria prompt to the user 
@@ -84,7 +89,7 @@ function updateLengthVal(change) {
 
 // Validate that at least 1 character type check box is checked
 function validateCheckBox() {
-  if(!includeLower.checked && !includeUpper.checked && !includeNumbers && !includeSpecial) {
+  if(!includeLower.checked && !includeUpper.checked && !includeNumbers.checked && !includeSpecial.checked) {
     alert("You must include at least 1 character type in your password.");
     includeLower.checked = true;
     includeUpper.checked = true;
