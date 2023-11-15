@@ -6,9 +6,14 @@ const passLength = document.querySelector('#length');
 
 const includeLower = document.getElementById('lowercase');
 const includeUpper = document.getElementById('uppercase');
+const includeNumbers = document.getElementById('numbers');
+const includeSpecial = document.getElementById('special');
 
+// Define character sets for each criteria 
 const lowerCharSet = 'abcdefghijklmnopqrstuvwxyz';
 const upperCharSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const numberCharSet = '0123456789';
+const specialCharSet = '/^[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]*$/;';
 
 // Write password to the #password input
 function writePassword() {
@@ -17,12 +22,9 @@ function writePassword() {
   passwordText.value = password;
 }
 
-function getRandomLower() {
-  return lowerCharSet[Math.floor(Math.random() * 26)];
-}
-
-function getRandomUpper() {
-  return upperCharSet[Math.floor(Math.random() * 26)];
+// Returns a random character from the parameter passed 
+function getRandomChar(charSet) {
+  return charSet[Math.floor(Math.random() * charSet.length)];
 }
 
 // Generate the password based on the set criteria
@@ -32,10 +34,16 @@ function generatePassword() {
 
   for (let i = 0; i < length; i++) {
     if (includeLower.checked) {
-      result += getRandomLower();
+      result += getRandomChar(lowerCharSet)
     }
     if (includeUpper.checked) {
-      result += getRandomUpper();
+      result += getRandomChar(upperCharSet);
+    }
+    if (includeNumbers.checked) {
+      result += getRandomChar(numberCharSet);
+    }
+    if (includeSpecial.checked) {
+      result += getRandomChar(specialCharSet);
     }
   }
 
@@ -51,6 +59,8 @@ function showCriteriaPrompt() {
   passLength.value = 8;
   includeLower.checked = true;
   includeUpper.checked = true;
+  includeNumbers.checked = true;
+  includeSpecial.checked = true;
 }
 
 // Hide the criteria prompt once the submit button is clicked 
@@ -74,10 +84,12 @@ function updateLengthVal(change) {
 
 // Validate that at least 1 character type check box is checked
 function validateCheckBox() {
-  if(!includeLower.checked && !includeUpper.checked) {
+  if(!includeLower.checked && !includeUpper.checked && !includeNumbers && !includeSpecial) {
     alert("You must include at least 1 character type in your password.");
     includeLower.checked = true;
     includeUpper.checked = true;
+    includeNumbers.checked = true;
+    includeSpecial.checked = true;
   } 
 }
 
@@ -87,3 +99,5 @@ criteriaSubmitBtn.addEventListener("click", hideCriteriaPrompt);
 passLength.addEventListener('change', updateLengthVal);
 includeLower.addEventListener('change', validateCheckBox);
 includeUpper.addEventListener('change', validateCheckBox);
+includeNumbers.addEventListener('change', validateCheckBox);
+includeSpecial.addEventListener('change', validateCheckBox);
